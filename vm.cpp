@@ -59,6 +59,7 @@ void vm::pdnb() {
 
 void vm::gdch() {
     char x [4];
+    vm::ST += 1;
     std::cin >> x;
     std::strncpy(x, x, 4);
     word a("ch", x);
@@ -67,6 +68,7 @@ void vm::gdch() {
 
 void vm::gdnb() {
     int x;
+    vm::ST += 1;
     std::cin >> x;
     memory[realadr(vm::ST)] = x;
 }
@@ -99,7 +101,7 @@ void vm::jm(short adr) {
 }
 
 void vm::halt() {
-    std::cout << "VM HALT";
+    std::cout << "\nVM HALT\n";
 }
 
 vm::~vm() {

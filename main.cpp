@@ -20,6 +20,7 @@ int main(int argc, char** argv) {
     v.gdnb();
     v.add();
     v.pdnb();
+    v.halt();
 
     //std::cout << " "<< m.hexadimal() <<" " << a.vchar();
     return (EXIT_SUCCESS);
