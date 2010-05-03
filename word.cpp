@@ -21,13 +21,13 @@ word::word(std::string sys, std::string numbers) {
     if (sys == "16") {
         ss << std::hex << numbers;
         ss >> x;
-        std::cout << static_cast<int> (x);
+        //std::cout << static_cast<int> (x);
     }
 
     if (sys == "10") {
         ss << std::dec << numbers;
         ss >> x;
-        std::cout << static_cast<int> (x);
+        //std::cout << static_cast<int> (x);
     }
 
     if (sys == "ch") {

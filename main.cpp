@@ -17,9 +17,7 @@ int main(int argc, char** argv) {
     vm v;
 
     v.gdnb();
-    v.gdnb();
-    v.add();
-    v.pdnb();
+    v.pdch();
     v.halt();
 
     //std::cout << " "<< m.hexadimal() <<" " << a.vchar();

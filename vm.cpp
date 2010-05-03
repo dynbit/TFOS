@@ -43,7 +43,7 @@ void vm::div() {
 }
 
 void vm::pdch() {
-    int i = memory[realadr(vm::ST - 1)];
+    int i = memory[realadr(vm::ST)];
     std::string s;
     std::stringstream out;
     out << i;
@@ -58,10 +58,10 @@ void vm::pdnb() {
 }
 
 void vm::gdch() {
-    char x [4];
+    char x [4], y[256];
     vm::ST += 1;
-    std::cin >> x;
-    std::strncpy(x, x, 4);
+    std::cin >> y;
+    std::strncpy(y, x, 4);
     word a("ch", x);
     memory[realadr(vm::ST)] = a.value;
 }
