@@ -8,6 +8,8 @@
 #include "vm.h"
 #include "word.h"
 #include <sstream>
+#include <iostream>
+#include <cstring>
 
 vm::vm() {
     vm::ST = 255;
@@ -56,9 +58,9 @@ void vm::pdnb() {
 }
 
 void vm::gdch() {
-    std::string x;
+    char x [4];
     std::cin >> x;
-    x = std::copy(x, 4, 0);
+    std::strncpy(x, x, 4);
     word a("ch", x);
     memory[realadr(vm::ST)] = a.value;
 }
@@ -66,7 +68,7 @@ void vm::gdch() {
 void vm::gdnb() {
     int x;
     std::cin >> x;
-    memory[realadr(vm::ST)] = a;
+    memory[realadr(vm::ST)] = x;
 }
 
 void vm::ps(int hex) {
@@ -97,7 +99,7 @@ void vm::jm(short adr) {
 }
 
 void vm::halt() {
-    std::cout << "VM HALT"
+    std::cout << "VM HALT";
 }
 
 vm::~vm() {

@@ -1,5 +1,5 @@
-build/Debug/GNU-Linux-x86/main.o: main.cpp word.h virtualstack.h
+build/Debug/GNU-Linux-x86/main.o: main.cpp word.h vm.h
 
 word.h:
 
-virtualstack.h:
+vm.h:

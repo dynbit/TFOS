@@ -8,22 +8,20 @@
 #include <stdlib.h>
 #include <iostream>
 #include "word.h"
-#include "virtualstack.h"
+#include "vm.h"
 /*
  * 
  */
 int main(int argc, char** argv) {
 
+    vm v;
 
-    word a("16", "FFFFFFFF");
-    word m("10", "-18");
-    word c("ch", "ABCD");
+    v.gdnb();
+    v.gdnb();
+    v.add();
+    v.pdnb();
 
-    int i;
-    std::string k;
-    k="ABCD";
-    i=k[0];
-    std::cout << " "<< m.hexadimal() <<" " << a.vchar();
+    //std::cout << " "<< m.hexadimal() <<" " << a.vchar();
     return (EXIT_SUCCESS);
 }
 
