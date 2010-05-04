@@ -15,11 +15,11 @@
 int main(int argc, char** argv) {
 
     vm v;
+    word w("ch", "aaaq");
+    v.gdch();
 
-    v.gdnb();
-    v.pdch();
-    v.halt();
 
+    
     //std::cout << " "<< m.hexadimal() <<" " << a.vchar();
     return (EXIT_SUCCESS);
 }

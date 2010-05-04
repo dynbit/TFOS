@@ -58,11 +58,18 @@ void vm::pdnb() {
 }
 
 void vm::gdch() {
-    char x [4], y[256];
+    std::string x, y;
     vm::ST += 1;
-    std::cin >> y;
-    std::strncpy(y, x, 4);
+    std::getline(std::cin, y);
+    x = "    ";
+    x[0] = y[0];
+    x[1] = y[1];
+    x[2] = y[2];
+    x[3] = y[3];
     word a("ch", x);
+
+    std::cout << a.vchar();
+
     memory[realadr(vm::ST)] = a.value;
 }
 
@@ -75,7 +82,7 @@ void vm::gdnb() {
 
 void vm::ps(int hex) {
     vm::ST++;
-
+    memory[realadr(vm::ST)] = memory[realadr(hex)];
 }
 
 void vm::pp(int hex) {
