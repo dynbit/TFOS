@@ -9,7 +9,7 @@
 #include "word.h"
 #include <sstream>
 #include <iostream>
-#include <cstring>
+#include <string>
 #include <iostream>
 #include <fstream>
 
@@ -106,8 +106,8 @@ void vm::jm(short adr) {
     vm::IC = adr;
 }
 
-void vm::halt() {
-    std::cout << "\nVM HALT\n";
+void vm::vhalt() {
+    std::cout << "VM HALT";
 }
 
 void vm::setmemoryfromfile(std::string filename) {
@@ -127,14 +127,14 @@ void vm::setmemoryfromfile(std::string filename) {
                 vm::memory[realadr(mempnt)] = conv.value;
                 mempnt += 1;
 
-         //       std::cout << conv.vchar() << std::endl; //debug
+                //       std::cout << conv.vchar() << std::endl; //debug
             } else if (s == "DB") {
                 file >> s;
                 conv.renew("ch", s);
                 vm::memory[realadr(mempnt)] = conv.value;
                 mempnt += 1;
 
-          //      std::cout << conv.vchar() << std::endl; //debug
+                //      std::cout << conv.vchar() << std::endl; //debug
             }
         }
         mempnt = 96;
@@ -142,8 +142,8 @@ void vm::setmemoryfromfile(std::string filename) {
             conv.renew("ch", s);
             vm::memory[realadr(mempnt)] = conv.value;
 
-//            conv.value = vm::memory[realadr(mempnt)]; //debug
-//            std::cout << conv.vchar() << std::endl; //debug
+            //            conv.value = vm::memory[realadr(mempnt)]; //debug
+            std::cout << mempnt << " " << conv.vchar() << std::endl; //debug
 
             mempnt += 1;
         }
@@ -152,30 +152,140 @@ void vm::setmemoryfromfile(std::string filename) {
     }
     file.close();
 
-//    mempnt = 0;
-//    for(int i = 0; i < 256; i++){
-//        conv.value = vm::memory[realadr(i)];
-//        std::cout << conv.vchar() << std::endl;
-//        std::cin >> s;
-//    }
+    //    mempnt = 0;
+    //    for(int i = 0; i < 256; i++){
+    //        conv.value = vm::memory[realadr(i)];
+    //        std::cout << conv.vchar() << std::endl;
+    //        std::cin >> s;
+    //    }
 }
 
-
-int vm::step(){
+int vm::step() {
     word conv("10", "0");
-    int i = vm::memory[realadr(vm::IC)];
+    int i = vm::memory[realadr(vm::IC)], command;
     conv.renew("ch", "HALT");
     int halt = conv.value;
-    std::string command;
-    while (i != halt) {
-        conv.value = i;
-        command = conv.vchar();
-        if (command == "ADD"){
-            add();
-            std::cout << "ADD ";
-        }
+    std::string temp, hex = "  ";
+
+    conv.renew("ch", "ADD");
+    command = conv.value;
+    if (i == command) {
+        add();
+        //        std::cout << "ADD";
     }
+
+    conv.renew("ch", "SUB");
+    command = conv.value;
+    if (i == command) {
+        sub();
+        //        std::cout << "SUB";
+    }
+
+    conv.renew("ch", "MUL");
+    command = conv.value;
+    if (i == command) {
+        mul();
+        //        std::cout << "MUL";
+    }
+
+    conv.renew("ch", "DIV");
+    command = conv.value;
+    if (i == command) {
+        div();
+        //        std::cout << "DIV";
+    }
+
+    conv.renew("ch", "PDCH");
+    command = conv.value;
+    if (i == command) {
+        pdch();
+        //        std::cout << "PDCH";
+    }
+
+    conv.renew("ch", "PDNB");
+    command = conv.value;
+    if (i == command) {
+        pdnb();
+        //        std::cout << "PDNB";
+    }
+
+    conv.renew("ch", "GDCH");
+    command = conv.value;
+    if (i == command) {
+        gdch();
+        //        std::cout << "GDCH";
+    }
+
+    conv.renew("ch", "GDNB");
+    command = conv.value;
+    if (i == command) {
+        gdnb();
+        //        std::cout << "GDNB";
+    }
+
+    //    PUSH
+    conv.value = i;
+    temp = conv.vchar();
+    if (temp[0] == 'P' && temp[1] == 'S') {
+        hex[0] = temp[2];
+        hex[1] = temp[3];
+        conv.renew("16", hex);
+        ps(conv.value);
+        //        std::cout << "PS";
+    }
+    //  POP
+    conv.value = i;
+    temp = conv.vchar();
+    if (temp[0] == 'P' && temp[1] == 'P') {
+        hex[0] = temp[2];
+        hex[1] = temp[3];
+        conv.renew("16", hex);
+        pp(conv.value);
+        //        std::cout << "PP";
+    }
+
+    //Jump if equal
+    conv.value = i;
+    temp = conv.vchar();
+
+    if (temp[0] == 'J' && temp[1] == 'E') {
+        hex[0] = temp[2];
+        hex[1] = temp[3];
+        conv.renew("16", hex);
+        je(conv.value);
+        //        std::cout << "JE"<< conv.decimal();
+    }
+    //Jump if not equal
+    conv.value = i;
+    temp = conv.vchar();
+    if (temp[0] == 'J' && temp[1] == 'N') {
+        hex[0] = temp[2];
+        hex[1] = temp[3];
+        conv.renew("16", hex);
+        jn(conv.value);
+        //        std::cout << "JN";
+    }
+    //  Jump
+    conv.value = i;
+    temp = conv.vchar();
+    if (temp[0] == 'J' && temp[1] == 'M') {
+        hex[0] = temp[2];
+        hex[1] = temp[3];
+        conv.renew("16", hex);
+        jm(conv.value);
+        //        std::cout << "JM";
+    }
+
+    conv.renew("ch", "HALT");
+    command = conv.value;
+    if (i == command) {
+        vhalt();
+        //        std::cout << "HALT";
+    }
+    vm::IC += 1;
+
 }
+
 vm::~vm() {
 }
 

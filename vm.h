@@ -29,7 +29,7 @@ public:
     void je(short);
     void jn(short);
     void jm(short);
-    void halt();
+    void vhalt();
     void setmemoryfromfile(std::string);
     int step();
 private:

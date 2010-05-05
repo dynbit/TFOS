@@ -19,9 +19,19 @@
 int main(int argc, char** argv) {
 
     vm v;
-       v.setmemoryfromfile("sample.prg");
+    v.setmemoryfromfile("sample.prg");
+    v.step();
+    v.step();
+    v.step();
+    v.step();
+    v.step();
+    v.step();
+    v.step();
+    v.step();
+    v.step();
+    v.step();
 
-
+    v.step();
     //    std::string s;
     //    std::cin >> s;
     //    word w("ch", s);
