@@ -24,6 +24,10 @@ int vm::realadr(int hex) {
     return hex;
 }
 
+
+/*
+ * VM commands:
+ */
 void vm::add() {
     memory[realadr(vm::ST - 1)] += memory[realadr(vm::ST)];
     ST -= 1;
@@ -107,7 +111,7 @@ void vm::jm(short adr) {
 }
 
 void vm::vhalt() {
-    std::cout << "VM HALT";
+    std::cout << std::endl << "VM HALT" << std::endl;
 }
 
 void vm::setmemoryfromfile(std::string filename) {
@@ -143,7 +147,7 @@ void vm::setmemoryfromfile(std::string filename) {
             vm::memory[realadr(mempnt)] = conv.value;
 
             //            conv.value = vm::memory[realadr(mempnt)]; //debug
-            std::cout << mempnt << " " << conv.vchar() << std::endl; //debug
+            //std::cout << mempnt << " " << conv.vchar() << std::endl; //debug
 
             mempnt += 1;
         }
@@ -160,62 +164,66 @@ void vm::setmemoryfromfile(std::string filename) {
     //    }
 }
 
+/*
+ * completes operation pointed with instruction counter(IC).
+ * Increments IC afterwards
+ */
 int vm::step() {
     word conv("10", "0");
     int i = vm::memory[realadr(vm::IC)], command;
     conv.renew("ch", "HALT");
     int halt = conv.value;
     std::string temp, hex = "  ";
-
+    //Addition
     conv.renew("ch", "ADD");
     command = conv.value;
     if (i == command) {
         add();
         //        std::cout << "ADD";
     }
-
+    //Substraction
     conv.renew("ch", "SUB");
     command = conv.value;
     if (i == command) {
         sub();
         //        std::cout << "SUB";
     }
-
+    //Multiplication
     conv.renew("ch", "MUL");
     command = conv.value;
     if (i == command) {
         mul();
         //        std::cout << "MUL";
     }
-
+    //Division
     conv.renew("ch", "DIV");
     command = conv.value;
     if (i == command) {
         div();
         //        std::cout << "DIV";
     }
-
+    //    put data char
     conv.renew("ch", "PDCH");
     command = conv.value;
     if (i == command) {
         pdch();
         //        std::cout << "PDCH";
     }
-
+    //put data number
     conv.renew("ch", "PDNB");
     command = conv.value;
     if (i == command) {
         pdnb();
         //        std::cout << "PDNB";
     }
-
+    //get data char
     conv.renew("ch", "GDCH");
     command = conv.value;
     if (i == command) {
         gdch();
         //        std::cout << "GDCH";
     }
-
+    //Get data number
     conv.renew("ch", "GDNB");
     command = conv.value;
     if (i == command) {

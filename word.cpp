@@ -19,6 +19,10 @@ word::word(std::string sys, std::string numbers) {
     renew(sys, numbers);
 }
 
+/*
+ * renew. Function to chance value of word. Given sys{"10", "16", "ch"} and
+ * string with correct number or char set converts it into integer.
+ */
 void word::renew(std::string sys, std::string numbers) {
      std::stringstream ss;
     unsigned int x = 0;
@@ -56,12 +60,13 @@ void word::renew(std::string sys, std::string numbers) {
     word::value = x;
 }
 
+//returns decimal representation as a string
 std::string word::decimal() {
     std::stringstream ss; //create a stringstream
     ss << word::value; //add number to the stream
     return ss.str(); //return a string with the contents of the stream
 }
-
+//returns hexadimal representation
 std::string word::hexadimal() {
 
     std::stringstream ss;
@@ -71,7 +76,7 @@ std::string word::hexadimal() {
     return retval;
 
 }
-
+//returns representation as 4 chars
 std::string word::vchar() {
 
     std::div_t x;
