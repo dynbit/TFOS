@@ -10,10 +10,12 @@
 #include <sstream>
 #include <iostream>
 #include <cstring>
+#include <iostream>
+#include <fstream>
 
 vm::vm() {
     vm::ST = 255;
-    vm::IC = 0;
+    vm::IC = 96;
 
 
 }
@@ -67,9 +69,6 @@ void vm::gdch() {
     x[2] = y[2];
     x[3] = y[3];
     word a("ch", x);
-
-    std::cout << a.vchar();
-
     memory[realadr(vm::ST)] = a.value;
 }
 
@@ -109,6 +108,55 @@ void vm::jm(short adr) {
 
 void vm::halt() {
     std::cout << "\nVM HALT\n";
+}
+
+void vm::setmemoryfromfile(std::string filename) {
+    std::string s;
+    std::ifstream file(filename.c_str());
+    word conv("10", "0");
+    short mempnt = 0;
+    file >> s;
+    if (s == "DATA") {
+        while (file >> s && s != "CODE" && mempnt < 96) {
+            if (s == "DE") {
+                vm::memory[realadr(mempnt)] = 0;
+                mempnt += 1;
+            } else if (s == "DW") {
+                file >> s;
+                conv.renew("10", s);
+                vm::memory[realadr(mempnt)] = conv.value;
+                mempnt += 1;
+
+         //       std::cout << conv.vchar() << std::endl; //debug
+            } else if (s == "DB") {
+                file >> s;
+                conv.renew("ch", s);
+                vm::memory[realadr(mempnt)] = conv.value;
+                mempnt += 1;
+
+          //      std::cout << conv.vchar() << std::endl; //debug
+            }
+        }
+        mempnt = 96;
+        while (file >> s && s != "HALT" && mempnt < 192) {
+            conv.renew("ch", s);
+            vm::memory[realadr(mempnt)] = conv.value;
+            mempnt += 1;
+        //         conv.value =  vm::memory[realadr(mempnt)]; //debug
+            std::cout << conv.vchar() << std::endl; //debug
+        }
+        conv.renew("ch", "HALT");
+        vm::memory[realadr(mempnt)] = conv.value;
+        mempnt += 1;
+    }
+    file.close();
+
+//    mempnt = 0;
+//    for(int i = 0; i < 256; i++){
+//        conv.value = vm::memory[realadr(i)];
+//        std::cout << conv.vchar() << std::endl;
+//        std::cin >> s;
+//    }
 }
 
 vm::~vm() {

@@ -8,6 +8,9 @@
 #ifndef _VM_H
 #define	_VM_H
 
+#include <string>
+
+
 class vm {
 public:
     vm();
@@ -27,6 +30,7 @@ public:
     void jn(short);
     void jm(short);
     void halt();
+    void setmemoryfromfile(std::string);
 private:
     int ST ;
     short IC ;

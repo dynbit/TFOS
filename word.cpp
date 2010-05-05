@@ -49,6 +49,41 @@ word::word(std::string sys, std::string numbers) {
     word::value = x;
 }
 
+
+void word::renew(std::string sys, std::string numbers){
+    std::stringstream ss;
+    unsigned int x = 0;
+    if (sys == "16") {
+        ss << std::hex << numbers;
+        ss >> x;
+        //std::cout << static_cast<int> (x);
+    }
+
+    if (sys == "10") {
+        ss << std::dec << numbers;
+        ss >> x;
+        //std::cout << static_cast<int> (x);
+    }
+
+    if (sys == "ch") {
+        if (numbers.length() < 5) {
+            for (int i = 0; i < numbers.length() - 1; i++) {
+                x += int(numbers[i]);
+                x *= 256;
+            }
+            x += int(numbers[3]);
+        } else {
+            x = 0;
+        }
+    }
+    //       if (sys == 2) {
+    //           x= std::bitset<std::numeric_limits<unsigned long>::digits>(numbers).to_ulong();
+    //           std::cout << static_cast<int>(x);
+    //       }
+
+    word::value = x;
+}
+
 std::string word::decimal() {
     std::stringstream ss; //create a stringstream
     ss << word::value; //add number to the stream

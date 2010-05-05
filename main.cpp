@@ -12,12 +12,20 @@
 /*
  * 
  */
+
+#include <iostream>
+#include <fstream>
+
 int main(int argc, char** argv) {
 
     vm v;
-    word w("ch", "aaaq");
-    v.gdch();
+    v.setmemoryfromfile("sample.prg");
 
+    word w("ch", "aabb");
+    int a = w.value;
+    std::cout << w.value << std::endl << w.vchar() << std::endl;
+    w.value = a;
+    std::cout << w.value << std::endl << w.vchar() << std::endl;
 
     
     //std::cout << " "<< m.hexadimal() <<" " << a.vchar();

@@ -31,8 +31,8 @@ OBJECTDIR=build/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/vm.o \
 	${OBJECTDIR}/word.o \
+	${OBJECTDIR}/vm.o \
 	${OBJECTDIR}/virtualstack.o \
 	${OBJECTDIR}/CPU.o \
 	${OBJECTDIR}/realmachine.o \
@@ -62,15 +62,15 @@ dist/Debug/GNU-Linux-x86/os: ${OBJECTFILES}
 	${MKDIR} -p dist/Debug/GNU-Linux-x86
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/os ${OBJECTFILES} ${LDLIBSOPTIONS} 
 
-${OBJECTDIR}/vm.o: nbproject/Makefile-${CND_CONF}.mk vm.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/vm.o vm.cpp
-
 ${OBJECTDIR}/word.o: nbproject/Makefile-${CND_CONF}.mk word.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/word.o word.cpp
+
+${OBJECTDIR}/vm.o: nbproject/Makefile-${CND_CONF}.mk vm.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/vm.o vm.cpp
 
 ${OBJECTDIR}/virtualstack.o: nbproject/Makefile-${CND_CONF}.mk virtualstack.cpp 
 	${MKDIR} -p ${OBJECTDIR}

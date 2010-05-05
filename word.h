@@ -16,6 +16,7 @@
 class word {
 public:
     word(std::string, std::string );
+    void renew(std::string, std::string);
     std::string decimal();
     std::string hexadimal();
     std::string vchar();
