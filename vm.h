@@ -31,6 +31,7 @@ public:
     void jm(short);
     void halt();
     void setmemoryfromfile(std::string);
+    int step();
 private:
     int ST ;
     short IC ;

@@ -19,15 +19,20 @@
 int main(int argc, char** argv) {
 
     vm v;
-    v.setmemoryfromfile("sample.prg");
+       v.setmemoryfromfile("sample.prg");
 
-    word w("ch", "aabb");
-    int a = w.value;
-    std::cout << w.value << std::endl << w.vchar() << std::endl;
-    w.value = a;
-    std::cout << w.value << std::endl << w.vchar() << std::endl;
 
-    
+    //    std::string s;
+    //    std::cin >> s;
+    //    word w("ch", s);
+    //    int a = w.value;
+    //    std::cout << w.value << std::endl << w.vchar() << std::endl;
+    //    w.value = a;
+    //    std::cout << w.value << std::endl << w.vchar() << std::endl;
+
+
+
+
     //std::cout << " "<< m.hexadimal() <<" " << a.vchar();
     return (EXIT_SUCCESS);
 }

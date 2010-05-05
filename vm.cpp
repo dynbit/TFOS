@@ -141,13 +141,14 @@ void vm::setmemoryfromfile(std::string filename) {
         while (file >> s && s != "HALT" && mempnt < 192) {
             conv.renew("ch", s);
             vm::memory[realadr(mempnt)] = conv.value;
+
+//            conv.value = vm::memory[realadr(mempnt)]; //debug
+//            std::cout << conv.vchar() << std::endl; //debug
+
             mempnt += 1;
-        //         conv.value =  vm::memory[realadr(mempnt)]; //debug
-            std::cout << conv.vchar() << std::endl; //debug
         }
         conv.renew("ch", "HALT");
         vm::memory[realadr(mempnt)] = conv.value;
-        mempnt += 1;
     }
     file.close();
 
@@ -159,6 +160,22 @@ void vm::setmemoryfromfile(std::string filename) {
 //    }
 }
 
+
+int vm::step(){
+    word conv("10", "0");
+    int i = vm::memory[realadr(vm::IC)];
+    conv.renew("ch", "HALT");
+    int halt = conv.value;
+    std::string command;
+    while (i != halt) {
+        conv.value = i;
+        command = conv.vchar();
+        if (command == "ADD"){
+            add();
+            std::cout << "ADD ";
+        }
+    }
+}
 vm::~vm() {
 }
 
