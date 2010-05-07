@@ -32,10 +32,15 @@ public:
     void vhalt();
     void setmemoryfromfile(std::string);
     int step();
+    void printstack();
+    bool finished();
+    int stackincrement();
+    int stackdecrement();
 private:
     int ST ;
     short IC ;
     int memory[256];
+    bool finish;
 };
 
 #endif	/* _VM_H */

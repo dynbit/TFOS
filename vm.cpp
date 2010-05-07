@@ -14,8 +14,9 @@
 #include <fstream>
 
 vm::vm() {
-    vm::ST = 255;
-    vm::IC = 96;
+    ST = 255;
+    IC = 96;
+    finish = false;
 
 
 }
@@ -29,23 +30,43 @@ int vm::realadr(int hex) {
  * VM commands:
  */
 void vm::add() {
-    memory[realadr(vm::ST - 1)] += memory[realadr(vm::ST)];
-    ST -= 1;
+    if (ST < 255){
+    memory[realadr(vm::ST + 1)] += memory[realadr(vm::ST)];
+    }
+    else{
+        memory[realadr(191)] += memory[realadr(vm::ST)];
+    }
+    stackincrement();
 }
 
 void vm::sub() {
-    memory[realadr(vm::ST - 1)] -= memory[realadr(vm::ST)];
-    ST -= 1;
+    if (ST < 255){
+    memory[realadr(vm::ST + 1)] -= memory[realadr(vm::ST)];
+    }
+    else{
+        memory[realadr(191)] -= memory[realadr(vm::ST)];
+    }
+    stackincrement();
 }
 
 void vm::mul() {
-    memory[realadr(vm::ST - 1)] *= memory[realadr(vm::ST)];
-    ST -= 1;
+    if (ST < 255){
+    memory[realadr(vm::ST + 1)] *= memory[realadr(vm::ST)];
+    }
+    else{
+        memory[realadr(191)] *= memory[realadr(vm::ST)];
+    }
+    stackincrement();
 }
 
 void vm::div() {
-    memory[realadr(vm::ST - 1)] /= memory[realadr(vm::ST)];
-    ST -= 1;
+    if (ST < 255){
+    memory[realadr(vm::ST + 1)] /= memory[realadr(vm::ST)];
+    }
+    else{
+        memory[realadr(191)] /= memory[realadr(vm::ST)];
+    }
+    stackincrement();
 }
 
 void vm::pdch() {
@@ -65,7 +86,7 @@ void vm::pdnb() {
 
 void vm::gdch() {
     std::string x, y;
-    vm::ST += 1;
+    stackdecrement();
     std::getline(std::cin, y);
     x = "    ";
     x[0] = y[0];
@@ -78,19 +99,19 @@ void vm::gdch() {
 
 void vm::gdnb() {
     int x;
-    vm::ST += 1;
+    stackdecrement();
     std::cin >> x;
     memory[realadr(vm::ST)] = x;
 }
 
 void vm::ps(int hex) {
-    vm::ST++;
+    stackdecrement();
     memory[realadr(vm::ST)] = memory[realadr(hex)];
 }
 
 void vm::pp(int hex) {
     memory[realadr(hex)] = memory[realadr(vm::ST)];
-    vm::ST--;
+    stackincrement();
 }
 
 void vm::je(short adr) {
@@ -111,11 +132,27 @@ void vm::jm(short adr) {
 }
 
 void vm::vhalt() {
+    finish = true;
     std::cout << std::endl << "VM HALT" << std::endl;
 }
 
+bool vm::finished(){
+    return finish;
+}
+
+int vm::stackdecrement(){
+    ST--;
+    if (ST < 191) {ST = 255;};
+    return 0;
+}
+
+int vm::stackincrement(){
+    ST++;
+    if (ST > 255) {ST = 191;};
+    return 0;
+}
 void vm::setmemoryfromfile(std::string filename) {
-    std::string s;
+    std::string s, temp = "   ";
     std::ifstream file(filename.c_str());
     word conv("10", "0");
     short mempnt = 0;
@@ -133,8 +170,13 @@ void vm::setmemoryfromfile(std::string filename) {
 
                 //       std::cout << conv.vchar() << std::endl; //debug
             } else if (s == "DB") {
-                file >> s;
-                conv.renew("ch", s);
+                getline(file, s);
+                temp="    ";
+                temp[0]=s[1];
+                temp[1]=s[2];
+                temp[2]=s[3];
+                temp[3]=s[4];
+                conv.renew("ch", temp);
                 vm::memory[realadr(mempnt)] = conv.value;
                 mempnt += 1;
 
@@ -169,6 +211,7 @@ void vm::setmemoryfromfile(std::string filename) {
  * Increments IC afterwards
  */
 int vm::step() {
+    if (finish == true) {return 1 ;};
     word conv("10", "0");
     int i = vm::memory[realadr(vm::IC)], command;
     conv.renew("ch", "HALT");
@@ -292,6 +335,13 @@ int vm::step() {
     }
     vm::IC += 1;
 
+}
+
+void vm::printstack(){
+    std::cout << "STACK" << std::endl;
+    for (int i=192 ; i < 256; i++){
+        std::cout << memory[realadr(i)] << std::endl;
+    }
 }
 
 vm::~vm() {
