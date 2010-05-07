@@ -29,6 +29,9 @@ public:
     void jn(vm *, short);
     void jm(vm *, short);
     virtual ~realmachine();
+
+
+
     int memory[65536];
 
 private:

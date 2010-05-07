@@ -22,21 +22,14 @@ vm::vm(realmachine * real, int number, std::string file) {
     setmemoryfromfile(file);
 }
 
-
-/*
- * VM commands:
- */
-
-
+//stops further execution of virtual machine
 void vm::vhalt() {
     finish = true;
 //    std::cout << std::endl << "VM HALT" << std::endl;
 }
 
-bool vm::finished(){
-    return finish;
-}
 
+//controls stack pointer
 int vm::stackdecrement(){
     ST--;
     if (ST < 191) {ST = 255;};
@@ -48,6 +41,8 @@ int vm::stackincrement(){
     if (ST > 255) {ST = 191;};
     return 0;
 }
+
+// reads file for data and commands sequence
 void vm::setmemoryfromfile(std::string filename) {
     std::string s, temp = "   ";
     std::ifstream file(filename.c_str());

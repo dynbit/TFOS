@@ -24,7 +24,7 @@ int main(int argc, char** argv) {
     real = new realmachine;
     vm v(real, 0, "sample.prg");
    
-    while (v.finished() == false ){
+    while (v.finish == false ){
         v.step();
     }
 

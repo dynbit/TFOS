@@ -20,15 +20,14 @@ public:
     void vhalt();
     void setmemoryfromfile(std::string);
     int step();
-    bool finished();
     int stackincrement();
     int stackdecrement();
     
     
-    realmachine * machine;
-    int ST, ID ;
-    short IC ;
-    bool finish;
+    realmachine * machine; //pointer to real machine in which virtual is working
+    int ST, ID ; //register and virtual machine's ID
+    short IC ; //register
+    bool finish; // bool to notice if vm has finished working
 private:
 
 };

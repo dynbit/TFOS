@@ -17,13 +17,17 @@
 realmachine::realmachine() {
 }
 
+
+//function to get real adress, knowing virtual machine and adr in virtual's machine memory
 int realmachine::realadr(vm * vm, short hex){
-    return (vm->ID*256 + hex);
+    return (vm->ID*256 + hex); // work in proggres :)
 }
 
 realmachine::~realmachine() {
 }
 
+
+// asempbler like commands, see https://docs.google.com/Doc?docid=0AXGXphr0CjTZZGc0aDNjYzJfNDcwZG1qeDZtZjY&hl=en for more details
 void realmachine::add(vm * vm) {
     if (vm->ST < 255){
     memory[realadr(vm, vm->ST + 1)] += memory[realadr(vm, vm->ST)];
@@ -78,6 +82,8 @@ void realmachine::pdch(vm * vm) {
 void realmachine::pdnb(vm * vm) {
     std::cout << memory[realadr(vm, vm->ST)];
 }
+
+
 
 void realmachine::gdch(vm * vm) {
     std::string x, y;
