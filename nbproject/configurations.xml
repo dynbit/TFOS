@@ -4,9 +4,7 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <itemPath>CPU.h</itemPath>
       <itemPath>realmachine.h</itemPath>
-      <itemPath>virtualstack.h</itemPath>
       <itemPath>vm.h</itemPath>
       <itemPath>word.h</itemPath>
     </logicalFolder>
@@ -17,10 +15,8 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>CPU.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
       <itemPath>realmachine.cpp</itemPath>
-      <itemPath>virtualstack.cpp</itemPath>
       <itemPath>vm.cpp</itemPath>
       <itemPath>word.cpp</itemPath>
     </logicalFolder>

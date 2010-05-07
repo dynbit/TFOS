@@ -33,8 +33,6 @@ OBJECTDIR=build/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/word.o \
 	${OBJECTDIR}/vm.o \
-	${OBJECTDIR}/virtualstack.o \
-	${OBJECTDIR}/CPU.o \
 	${OBJECTDIR}/realmachine.o \
 	${OBJECTDIR}/main.o
 
@@ -71,16 +69,6 @@ ${OBJECTDIR}/vm.o: nbproject/Makefile-${CND_CONF}.mk vm.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/vm.o vm.cpp
-
-${OBJECTDIR}/virtualstack.o: nbproject/Makefile-${CND_CONF}.mk virtualstack.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/virtualstack.o virtualstack.cpp
-
-${OBJECTDIR}/CPU.o: nbproject/Makefile-${CND_CONF}.mk CPU.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/CPU.o CPU.cpp
 
 ${OBJECTDIR}/realmachine.o: nbproject/Makefile-${CND_CONF}.mk realmachine.cpp 
 	${MKDIR} -p ${OBJECTDIR}
