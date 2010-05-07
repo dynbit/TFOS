@@ -10,37 +10,28 @@
 
 #include <string>
 
+class realmachine;
+#include "realmachine.h"
 
 class vm {
 public:
-    vm();
+    vm(int, std::string);
     virtual ~vm();
-    int realadr(int);
-    void add();
-    void sub();
-    void mul();
-    void div();
-    void pdch();
-    void pdnb();
-    void gdch();
-    void gdnb();
-    void ps(int);
-    void pp(int);
-    void je(short);
-    void jn(short);
-    void jm(short);
     void vhalt();
     void setmemoryfromfile(std::string);
     int step();
-    void printstack();
     bool finished();
     int stackincrement();
     int stackdecrement();
-private:
-    int ST ;
+    
+    
+    realmachine * machine;
+    int ST, ID ;
     short IC ;
     int memory[256];
     bool finish;
+private:
+
 };
 
 #endif	/* _VM_H */

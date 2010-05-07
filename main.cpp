@@ -9,6 +9,7 @@
 #include <iostream>
 #include "word.h"
 #include "vm.h"
+#include "realmachine.h"
 /*
  * 
  */
@@ -18,9 +19,10 @@
 
 int main(int argc, char** argv) {
 
-    vm v;
-    v.setmemoryfromfile("sample.prg");
-
+    vm v(1, "sample.prg");
+    realmachine * real;
+    real = new realmachine;
+    v.machine = real;
     while (v.finished() == false ){
         v.step();
     }
