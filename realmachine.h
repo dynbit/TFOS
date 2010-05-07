@@ -14,7 +14,7 @@ class vm;
 class realmachine {
 public:
     realmachine();
-    int realadr(vm *, int);
+    int realadr(vm *, short);
     void add(vm *);
     void sub(vm *);
     void mul(vm *);
@@ -29,6 +29,8 @@ public:
     void jn(vm *, short);
     void jm(vm *, short);
     virtual ~realmachine();
+    int memory[65536];
+
 private:
 
 

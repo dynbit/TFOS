@@ -19,10 +19,11 @@
 
 int main(int argc, char** argv) {
 
-    vm v(1, "sample.prg");
+
     realmachine * real;
     real = new realmachine;
-    v.machine = real;
+    vm v(real, 0, "sample.prg");
+   
     while (v.finished() == false ){
         v.step();
     }
@@ -36,6 +37,7 @@ int main(int argc, char** argv) {
     //    std::cout << w.value << std::endl << w.vchar() << std::endl;
 
 
+    delete real;
 
 
     //std::cout << " "<< m.hexadimal() <<" " << a.vchar();

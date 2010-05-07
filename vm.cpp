@@ -13,13 +13,13 @@
 #include <iostream>
 #include <fstream>
 
-vm::vm(int number, std::string filename) {
+vm::vm(realmachine * real, int number, std::string file) {
     ID = number;
     ST = 255;
-    IC = 96;
+    IC = 95;
     finish = false;
-    setmemoryfromfile(filename);
-
+    machine =  real;
+    setmemoryfromfile(file);
 }
 
 
@@ -57,12 +57,12 @@ void vm::setmemoryfromfile(std::string filename) {
     if (s == "DATA") {
         while (file >> s && s != "CODE" && mempnt < 96) {
             if (s == "DE") {
-                vm::memory[machine->realadr(this, mempnt)] = 0;
+                machine->memory[machine->realadr(this, mempnt)] = 0;
                 mempnt += 1;
             } else if (s == "DW") {
                 file >> s;
                 conv.renew("10", s);
-                vm::memory[machine->realadr(this, mempnt)] = conv.value;
+                machine->memory[machine->realadr(this, mempnt)] = conv.value;
                 mempnt += 1;
 
                 //       std::cout << conv.vchar() << std::endl; //debug
@@ -74,30 +74,30 @@ void vm::setmemoryfromfile(std::string filename) {
                 temp[2]=s[3];
                 temp[3]=s[4];
                 conv.renew("ch", temp);
-                vm::memory[machine->realadr(this, mempnt)] = conv.value;
+                machine->memory[machine->realadr(this, mempnt)] = conv.value;
                 mempnt += 1;
 
                 //      std::cout << conv.vchar() << std::endl; //debug
             }
         }
-        mempnt = 96;
-        while (file >> s && s != "HALT" && mempnt < 192) {
+        mempnt = 95;
+        while (file >> s && s != "HALT" && mempnt < 191) {
             conv.renew("ch", s);
-            vm::memory[machine->realadr(this, mempnt)] = conv.value;
+            machine->memory[machine->realadr(this, mempnt)] = conv.value;
 
-            //            conv.value = vm::memory[realadr(mempnt)]; //debug
+            //            conv.value = machine->memory[realadr(mempnt)]; //debug
             //std::cout << mempnt << " " << conv.vchar() << std::endl; //debug
 
             mempnt += 1;
         }
         conv.renew("ch", "HALT");
-        vm::memory[machine->realadr(this, mempnt)] = conv.value;
+        machine->memory[machine->realadr(this, mempnt)] = conv.value;
     }
     file.close();
 
     //    mempnt = 0;
     //    for(int i = 0; i < 256; i++){
-    //        conv.value = vm::memory[realadr(i)];
+    //        conv.value = machine->memory[realadr(i)];
     //        std::cout << conv.vchar() << std::endl;
     //        std::cin >> s;
     //    }
@@ -110,7 +110,7 @@ void vm::setmemoryfromfile(std::string filename) {
 int vm::step() {
     if (finish == true) {return 1 ;};
     word conv("10", "0");
-    int i = vm::memory[machine->realadr(this, IC)], command;
+    int i = machine->memory[machine->realadr(this, IC)], command;
     conv.renew("ch", "HALT");
     int halt = conv.value;
     std::string temp, hex = "  ";

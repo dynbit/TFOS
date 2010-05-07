@@ -15,7 +15,7 @@ class realmachine;
 
 class vm {
 public:
-    vm(int, std::string);
+    vm(realmachine *, int, std::string);
     virtual ~vm();
     void vhalt();
     void setmemoryfromfile(std::string);
@@ -28,7 +28,6 @@ public:
     realmachine * machine;
     int ST, ID ;
     short IC ;
-    int memory[256];
     bool finish;
 private:
 

@@ -17,8 +17,8 @@
 realmachine::realmachine() {
 }
 
-int realmachine::realadr(vm * vm, int hex){
-    return hex;
+int realmachine::realadr(vm * vm, short hex){
+    return (vm->ID*256 + hex);
 }
 
 realmachine::~realmachine() {
@@ -26,46 +26,46 @@ realmachine::~realmachine() {
 
 void realmachine::add(vm * vm) {
     if (vm->ST < 255){
-    vm->memory[realadr(vm, vm->ST + 1)] += vm->memory[realadr(vm, vm->ST)];
+    memory[realadr(vm, vm->ST + 1)] += memory[realadr(vm, vm->ST)];
     }
     else{
-        vm->memory[realadr(vm, 191)] += vm->memory[realadr(vm, vm->ST)];
+        memory[realadr(vm, 191)] += memory[realadr(vm, vm->ST)];
     }
     vm->stackincrement();
 }
 
 void realmachine::sub(vm * vm) {
     if (vm->ST < 255){
-    vm->memory[realadr(vm, vm->ST + 1)] -= vm->memory[realadr(vm, vm->ST)];
+    memory[realadr(vm, vm->ST + 1)] -= memory[realadr(vm, vm->ST)];
     }
     else{
-        vm->memory[realadr(vm, 191)] -= vm->memory[realadr(vm, vm->ST)];
+        memory[realadr(vm, 191)] -= memory[realadr(vm, vm->ST)];
     }
     vm->stackincrement();
 }
 
 void realmachine::mul(vm * vm) {
     if (vm->ST < 255){
-    vm->memory[realadr(vm, vm->ST + 1)] *= vm->memory[realadr(vm, vm->ST)];
+    memory[realadr(vm, vm->ST + 1)] *= memory[realadr(vm, vm->ST)];
     }
     else{
-        vm->memory[realadr(vm, 191)] *= vm->memory[realadr(vm, vm->ST)];
+        memory[realadr(vm, 191)] *= memory[realadr(vm, vm->ST)];
     }
     vm->stackincrement();
 }
 
 void realmachine::div(vm * vm) {
     if (vm->ST < 255){
-    vm->memory[realadr(vm, vm->ST + 1)] /= vm->memory[realadr(vm, vm->ST)];
+    memory[realadr(vm, vm->ST + 1)] /= memory[realadr(vm, vm->ST)];
     }
     else{
-        vm->memory[realadr(vm, 191)] /= vm->memory[realadr(vm, vm->ST)];
+        memory[realadr(vm, 191)] /= memory[realadr(vm, vm->ST)];
     }
     vm->stackincrement();
 }
 
 void realmachine::pdch(vm * vm) {
-    int i = vm->memory[realadr(vm, vm->ST)];
+    int i = memory[realadr(vm, vm->ST)];
     std::string s;
     std::stringstream out;
     out << i;
@@ -76,7 +76,7 @@ void realmachine::pdch(vm * vm) {
 }
 
 void realmachine::pdnb(vm * vm) {
-    std::cout << vm->memory[realadr(vm, vm->ST)];
+    std::cout << memory[realadr(vm, vm->ST)];
 }
 
 void realmachine::gdch(vm * vm) {
@@ -89,34 +89,34 @@ void realmachine::gdch(vm * vm) {
     x[2] = y[2];
     x[3] = y[3];
     word a("ch", x);
-    vm->memory[realadr(vm, vm->ST)] = a.value;
+    memory[realadr(vm, vm->ST)] = a.value;
 }
 
 void realmachine::gdnb(vm * vm) {
     int x;
     vm->stackdecrement();
     std::cin >> x;
-    vm->memory[realadr(vm, vm->ST)] = x;
+    memory[realadr(vm, vm->ST)] = x;
 }
 
 void realmachine::ps(vm * vm, int hex) {
     vm->stackdecrement();
-    vm->memory[realadr(vm, vm->ST)] = vm->memory[realadr(vm, hex)];
+    memory[realadr(vm, vm->ST)] = memory[realadr(vm, hex)];
 }
 
 void realmachine::pp(vm * vm, int hex) {
-    vm->memory[realadr(vm, hex)] = vm->memory[realadr(vm, vm->ST)];
+    memory[realadr(vm, hex)] = memory[realadr(vm, vm->ST)];
     vm->stackincrement();
 }
 
 void realmachine::je(vm * vm, short adr) {
-    if (vm->memory[realadr(vm, vm->ST)] == 0) {
+    if (memory[realadr(vm, vm->ST)] == 0) {
         vm->IC = adr;
     }
 }
 
 void realmachine::jn(vm * vm, short adr) {
-    if (vm->memory[realadr(vm, vm->ST)] != 0) {
+    if (memory[realadr(vm, vm->ST)] != 0) {
         vm->IC = adr;
     }
 
