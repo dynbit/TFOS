@@ -40,7 +40,7 @@ void word::renew(std::string sys, std::string numbers) {
 
     if (sys == "ch") {
         if (numbers.length() < 5) {
-            for (int i = 0; i < numbers.length(); i++) {
+            for (unsigned int i = 0; i < numbers.length(); i++) {
                 x *= 256;
                 x += int(numbers[i]);
 

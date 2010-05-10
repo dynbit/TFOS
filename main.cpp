@@ -7,15 +7,11 @@
 
 #include <stdlib.h>
 #include <iostream>
+#include <iostream>
+#include <fstream>
 #include "word.h"
 #include "vm.h"
 #include "realmachine.h"
-/*
- * 
- */
-
-#include <iostream>
-#include <fstream>
 
 int main(int argc, char** argv) {
 
@@ -28,14 +24,16 @@ int main(int argc, char** argv) {
         v.step();
     }
 
-    //    std::string s;
-    //    std::cin >> s;
-    //    word w("ch", s);
-    //    int a = w.value;
-    //    std::cout << w.value << std::endl << w.vchar() << std::endl;
-    //    w.value = a;
-    //    std::cout << w.value << std::endl << w.vchar() << std::endl;
+    //std::string s;
+    //std::cin >> s;
+    //word w("ch", s);
+    //int a = w.value;
+    //std::cout << w.value << std::endl << w.vchar() << std::endl;
+    //w.value = a;
+    //std::cout << w.value << std::endl << w.vchar() << std::endl;
 
+    std::cout << "\n";
+    std::cout << "VEIKIA\n";
 
     delete real;
 

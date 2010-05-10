@@ -107,7 +107,6 @@ int vm::step() {
     word conv("10", "0");
     int i = machine->memory[machine->realadr(this, IC)], command;
     conv.renew("ch", "HALT");
-    int halt = conv.value;
     std::string temp, hex = "  ";
     //Addition
     conv.renew("ch", "ADD");
@@ -226,7 +225,6 @@ int vm::step() {
         //        std::cout << "HALT";
     }
     IC += 1;
-
 }
 
 
