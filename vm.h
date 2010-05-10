@@ -24,10 +24,10 @@ public:
     int stackdecrement();
     
     
-    realmachine * machine; //pointer to real machine in which virtual is working
-    int ST, ID ; //register and virtual machine's ID
-    short IC ; //register
-    bool finish; // bool to notice if vm has finished working
+    realmachine * machine; 	//pointer to real machine in which virtual is working
+    int ST, ID ; 			//register and virtual machine's ID
+    short IC ; 				//register
+    bool finish; 			// bool to notice if vm has finished working
 private:
 
 };

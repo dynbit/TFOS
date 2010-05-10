@@ -5,18 +5,22 @@
  * Created on May 2, 2010, 11:11 PM
  */
 
-#include <stdlib.h>
+/*#include <stdlib.h>
 #include <iostream>
 #include <iostream>
 #include <fstream>
 #include "word.h"
 #include "vm.h"
-#include "realmachine.h"
+#include "realmachine.h"*/
+
+#include "gui.h"
 
 int main(int argc, char** argv) {
 
+	GUI * realGUI;
+	realGUI = new GUI(argc, argv);
 
-    realmachine * real;
+    /*realmachine * real;
     real = new realmachine;
     vm v(real, 0, "sample.prg");
    
@@ -38,7 +42,9 @@ int main(int argc, char** argv) {
     delete real;
 
 
-    //std::cout << " "<< m.hexadimal() <<" " << a.vchar();
-    return (EXIT_SUCCESS);
+    //std::cout << " "<< m.hexadimal() <<" " << a.vchar();*/
+    
+    
+    return 0;
 }
 
