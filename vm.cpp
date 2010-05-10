@@ -102,8 +102,8 @@ void vm::setmemoryfromfile(std::string filename) {
  * completes operation pointed with instruction counter(IC).
  * Increments IC afterwards
  */
-int vm::step() {
-    if (finish == true) {return 1 ;};
+void vm::step() {
+    if (finish == true) {return;};
     word conv("10", "0");
     int i = machine->memory[machine->realadr(this, IC)], command;
     conv.renew("ch", "HALT");

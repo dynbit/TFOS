@@ -19,7 +19,7 @@ public:
     virtual ~vm();
     void vhalt();
     void setmemoryfromfile(std::string);
-    int step();
+    void step();
     int stackincrement();
     int stackdecrement();
     
