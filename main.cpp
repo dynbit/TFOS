@@ -19,6 +19,7 @@ int main(int argc, char** argv) {
 
 	GUI * realGUI;
 	realGUI = new GUI(argc, argv);
+	realGUI->start();
 
     /*realmachine * real;
     real = new realmachine;

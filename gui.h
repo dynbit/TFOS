@@ -9,7 +9,12 @@
 class GUI {
 	public: 
 		GUI(int argc, char *argv[]);
+		void start();
 	private:
+		int argc;
+		char **argv;
+		static gboolean delete_event( GtkWidget *widget, GdkEvent  *event, gpointer data);
+		static void destroy(GtkWidget *widget, gpointer data);
 };
 
 #endif	/* _GUI_H */
