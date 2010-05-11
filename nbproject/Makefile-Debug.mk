@@ -33,6 +33,7 @@ OBJECTDIR=build/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/word.o \
 	${OBJECTDIR}/vm.o \
+	${OBJECTDIR}/pagingtable.o \
 	${OBJECTDIR}/realmachine.o \
 	${OBJECTDIR}/main.o
 
@@ -69,6 +70,11 @@ ${OBJECTDIR}/vm.o: nbproject/Makefile-${CND_CONF}.mk vm.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/vm.o vm.cpp
+
+${OBJECTDIR}/pagingtable.o: nbproject/Makefile-${CND_CONF}.mk pagingtable.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/pagingtable.o pagingtable.cpp
 
 ${OBJECTDIR}/realmachine.o: nbproject/Makefile-${CND_CONF}.mk realmachine.cpp 
 	${MKDIR} -p ${OBJECTDIR}

@@ -16,6 +16,7 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>main.cpp</itemPath>
+      <itemPath>pagingtable.cpp</itemPath>
       <itemPath>realmachine.cpp</itemPath>
       <itemPath>vm.cpp</itemPath>
       <itemPath>word.cpp</itemPath>

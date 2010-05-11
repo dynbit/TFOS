@@ -33,6 +33,7 @@ public:
 
 
     int memory[65536];
+    pagingtable ptable;
 
 private:
 
