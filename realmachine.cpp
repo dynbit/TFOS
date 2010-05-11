@@ -20,20 +20,20 @@ realmachine::realmachine() {
 
 //function to get real adress, knowing virtual machine and adr in virtual's machine memory
 int realmachine::realadr(vm * vm, short hex){
-    int empty = -1, found = -1;
+    int empty = -1;
 
     for(int i=0; i <4096; i++){
-        if ((empty == -1) && (ptable[i]->table->occupied == false) && ) {
+        if ((empty == -1) && (ptable.table[i].occupied == false)) {
             empty = i;
         }
-        if ((ptable[i]->table->vm == vm.ID) && (hex - ptable[i]->table->block < 16) && (hex - ptable[i]->table->block >= 0)){
+        if ((ptable.table[i].vm == vm->ID) && (hex - ptable.table[i].block * 16 < 16) && (hex - ptable.table[i].block * 16 >= 0)){
             return i*16 + hex % 16;
         }
     }
-    if (empty <> -1){
-        ptable[empty]->table->occupied = true;
-        ptable[empty]->table->vm = vm.ID;
-        ptable[empty]->table->block = hex / 16;
+    if (empty != -1){
+        ptable.table[empty].occupied = true;
+        ptable.table[empty].vm = vm->ID;
+        ptable.table[empty].block = hex / 16;
         return empty*16 + hex % 16;
     }
 

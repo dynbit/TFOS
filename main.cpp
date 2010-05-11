@@ -22,7 +22,7 @@ int main(int argc, char** argv) {
 
     realmachine * real;
     real = new realmachine;
-    vm v(real, 0, "sample.prg");
+    vm v(real, 1, "sample.prg");
    
     while (v.finish == false ){
         v.step();
