@@ -15,6 +15,7 @@ class GUI {
 		char **argv;
 		static gboolean delete_event( GtkWidget *widget, GdkEvent  *event, gpointer data);
 		static void destroy(GtkWidget *widget, gpointer data);
+		GList *prgList;
 };
 
 #endif	/* _GUI_H */
