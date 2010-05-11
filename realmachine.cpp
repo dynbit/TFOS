@@ -20,7 +20,24 @@ realmachine::realmachine() {
 
 //function to get real adress, knowing virtual machine and adr in virtual's machine memory
 int realmachine::realadr(vm * vm, short hex){
-    return (vm->ID*256 + hex); // work in proggres :)
+    int empty = -1, found = -1;
+
+    for(int i=0; i <4096; i++){
+        if ((empty == -1) && (ptable[i]->table->occupied == false) && ) {
+            empty = i;
+        }
+        if ((ptable[i]->table->vm == vm.ID) && (hex - ptable[i]->table->block < 16) && (hex - ptable[i]->table->block >= 0)){
+            return i*16 + hex % 16;
+        }
+    }
+    if (empty <> -1){
+        ptable[empty]->table->occupied = true;
+        ptable[empty]->table->vm = vm.ID;
+        ptable[empty]->table->block = hex / 16;
+        return empty*16 + hex % 16;
+    }
+
+    return -1; // no free space
 }
 
 realmachine::~realmachine() {

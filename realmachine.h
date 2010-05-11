@@ -10,6 +10,7 @@
 
 class vm;
 #include "vm.h"
+#include "pagingtable.h"
 
 class realmachine {
 public:
