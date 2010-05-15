@@ -34,6 +34,13 @@ public:
     int askForRes(std::string);
     int releaseRes(resource*, process*, bool);
     int Resplanner();
+
+    int createProc(std::string, int);
+    int destroyProc(process*);
+    int stopProc(process*);
+    int activateProc(process*);
+    int Scheduler();
+    
     int mainProc();
 private:
 

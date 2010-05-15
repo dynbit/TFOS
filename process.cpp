@@ -7,8 +7,7 @@
 
 #include "process.h"
 
-process::process(process *father, std::string name, int priority) {
-    process::father = father;
+process::process(std::string name, int priority) {
     process::name = name;
     process::priority = priority;
 }

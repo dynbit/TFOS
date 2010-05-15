@@ -11,19 +11,20 @@
 #include <list>
 
 kernel::kernel(realmachine *real) {
-    machine= real;
+    machine = real;
 }
 
-int kernel::mainProc(){
-    
+int kernel::mainProc() {
+
 }
 
-int kernel::createRes(std::string name){
+int kernel::createRes(std::string name) {
     resource Res;
     Res.message = name;
     Res.father = kernel::current;
     Res.father->childRes.push_back(&Res);
     kernel::resources.push_back(&Res);
+    Resplanner();
     return 0;
 };
 
@@ -31,23 +32,61 @@ int kernel::destroyRes(resource * dead) {
     dead->father->childRes.remove(dead);
     kernel::resources.remove(dead);
     delete dead;
+    Resplanner();
     return 0;
 };
 
-int kernel::askForRes(std::string name){
+int kernel::askForRes(std::string name) {
     waitingElement we(kernel::current, name);
     kernel::waiting.push_back(we);
+    Resplanner();
     return 0;
 };
 
-int kernel::releaseRes(resource* res, process* target, bool PNR){
+int kernel::releaseRes(resource* res, process* target, bool PNR) {
     res->target = target;
     res->PNR = PNR;
+    Resplanner();
     return 0;
 };
 
-int kernel::Resplanner(){
-    
+int kernel::Resplanner() {
+    return 0;
+};
+
+
+
+int kernel::createProc(std::string name, int priority) {
+    process proc(name, priority);
+    proc.father = kernel::current;
+    kernel::processes.push_back(&proc);
+    proc.father->childProc.push_back(&proc);
+    proc.childProc.clear;
+    proc.childRes.clear;
+    proc.curRes.clear;
+    proc.state = "READY";
+    return 0;
+};
+
+int kernel::destroyProc(process* dead) {
+    dead->father->childProc.remove(dead);
+    kernel::processes.remove(dead);
+    kernel::ready.remove(dead);
+    //nebaigtas
+
+    return 0;
+};
+
+int kernel::stopProc(process* proc) {
+    return 0;
+};
+
+int kernel::activateProc(process* proc) {
+    return 0;
+};
+
+int kernel::Scheduler() {
+    return 0;
 };
 
 kernel::~kernel() {
