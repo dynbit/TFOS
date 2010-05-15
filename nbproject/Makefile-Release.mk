@@ -31,11 +31,15 @@ OBJECTDIR=build/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/word.o \
 	${OBJECTDIR}/vm.o \
+	${OBJECTDIR}/word.o \
+	${OBJECTDIR}/resource.o \
+	${OBJECTDIR}/process.o \
+	${OBJECTDIR}/main.o \
+	${OBJECTDIR}/waitingElement.o \
 	${OBJECTDIR}/pagingtable.o \
-	${OBJECTDIR}/realmachine.o \
-	${OBJECTDIR}/main.o
+	${OBJECTDIR}/kernel.o \
+	${OBJECTDIR}/realmachine.o
 
 # C Compiler Flags
 CFLAGS=
@@ -61,30 +65,50 @@ dist/Release/GNU-Linux-x86/os: ${OBJECTFILES}
 	${MKDIR} -p dist/Release/GNU-Linux-x86
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/os ${OBJECTFILES} ${LDLIBSOPTIONS} 
 
+${OBJECTDIR}/vm.o: nbproject/Makefile-${CND_CONF}.mk vm.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/vm.o vm.cpp
+
 ${OBJECTDIR}/word.o: nbproject/Makefile-${CND_CONF}.mk word.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/word.o word.cpp
 
-${OBJECTDIR}/vm.o: nbproject/Makefile-${CND_CONF}.mk vm.cpp 
+${OBJECTDIR}/resource.o: nbproject/Makefile-${CND_CONF}.mk resource.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/vm.o vm.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/resource.o resource.cpp
+
+${OBJECTDIR}/process.o: nbproject/Makefile-${CND_CONF}.mk process.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/process.o process.cpp
+
+${OBJECTDIR}/main.o: nbproject/Makefile-${CND_CONF}.mk main.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/main.o main.cpp
+
+${OBJECTDIR}/waitingElement.o: nbproject/Makefile-${CND_CONF}.mk waitingElement.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/waitingElement.o waitingElement.cpp
 
 ${OBJECTDIR}/pagingtable.o: nbproject/Makefile-${CND_CONF}.mk pagingtable.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/pagingtable.o pagingtable.cpp
 
+${OBJECTDIR}/kernel.o: nbproject/Makefile-${CND_CONF}.mk kernel.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/kernel.o kernel.cpp
+
 ${OBJECTDIR}/realmachine.o: nbproject/Makefile-${CND_CONF}.mk realmachine.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/realmachine.o realmachine.cpp
-
-${OBJECTDIR}/main.o: nbproject/Makefile-${CND_CONF}.mk main.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/main.o main.cpp
 
 # Subprojects
 .build-subprojects:
