@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   realmachine.h
  * Author: aidas
  *
@@ -10,6 +10,7 @@
 
 class vm;
 #include "vm.h"
+#include "pagingtable.h"
 
 class realmachine {
 public:
@@ -30,7 +31,10 @@ public:
     void jm(vm *, short);
     virtual ~realmachine();
 
+
+
     int memory[65536];
+    pagingtable ptable;
 
 private:
 

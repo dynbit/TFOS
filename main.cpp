@@ -5,14 +5,6 @@
  * Created on May 2, 2010, 11:11 PM
  */
 
-/*#include <stdlib.h>
-#include <iostream>
-#include <iostream>
-#include <fstream>
-#include "word.h"
-#include "vm.h"
-#include "realmachine.h"*/
-
 #include "gui.h"
 
 int main(int argc, char** argv) {
