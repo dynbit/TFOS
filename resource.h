@@ -17,9 +17,9 @@ public:
     int ID;
 
     std::string name;
-    std::list<process*>  elements;          //sąrašas esamų resurso elementų. nill jeigu visiet prieinamas, arba process* jeigu kažkokiam specifiniam procesui
+    std::list<process*> father;             //sąrašas elementų tėvų
+    std::list<process*>  elements;          //sąrašas esamų resurso elementų. nill jeigu visiem prieinamas, arba process* jeigu kažkokiam specifiniam procesui
     std::list<process*> waiting;            //sąrašas procesų laukiančių resurso
-    process * father;
     bool PNR;                               //pakartotino naudojimo resursas
     virtual ~resource();
 private:

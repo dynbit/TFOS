@@ -9,6 +9,8 @@
 #include "resource.h"
 #include "process.h"
 #include <list>
+#include <algorithm>
+
 
 kernel::kernel(realmachine *real) {
     machine = real;
@@ -18,9 +20,26 @@ int kernel::mainProc() {
 
 }
 
-int kernel::createRes(std::string name) {
-    resource Res;
-    Res.message = name;
+std::string globalName;
+
+bool nameBool(resource* res){
+    if (res->name == globalName) {
+        return true;
+    };
+    return false;
+}
+
+resource * kernel::findRes(std::string name){
+    std::list<process*>::iterator result;
+    globalName = name;
+    result = std::find_if(kernel::resources.begin(),kernel::resources.end(), nameBool);
+    return result;
+
+}
+
+int kernel::createRes(std::string name, process* target) {
+    resource *Res = findRes(name);
+    Res.name = name;
     Res.father = kernel::current;
     Res.father->childRes.push_back(&Res);
     kernel::resources.push_back(&Res);

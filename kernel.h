@@ -27,7 +27,7 @@ public:
     std::list<process*> ready;          //pasiruošę procesai
     realmachine * machine;              //reali mašina
 
-
+    resource * findRes(std::string);
     int createRes(std::string);
     int destroyRes(resource*);
     int askForRes(std::string);
