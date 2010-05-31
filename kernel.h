@@ -21,12 +21,11 @@ public:
     kernel(realmachine*);
     virtual ~kernel();
 
-    std::list<process*> processes;
-    std::list<resource*> resources;
-    process *current;
-    std::list<process*> ready;
-    realmachine * machine;
-    std::list<waitingElement> waiting;
+    std::list<process*> processes;      //visi procesai
+    std::list<resource*> resources;     //visi resursai
+    process *current;                   //einamasis procesas
+    std::list<process*> ready;          //pasiruošę procesai
+    realmachine * machine;              //reali mašina
 
 
     int createRes(std::string);

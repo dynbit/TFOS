@@ -13,20 +13,23 @@
 
 class vm;
 
+
+// tėvinė visų procesų klasė
 class process {
 public:
-    process(process*, std::string, int);
+    process(process*, std::string, int);    //tėvas, pavadimas, priority
     virtual ~process();
+
+    virtual int step();                     //vienas proceso žingsnis. Grąžina kiek time vienetų sunaudojo
 
     int ID;
 
-    std::string state;
+    std::string state;                      
     process * father;
     std::string name;
     int priority;
     std::list<resource*> childRes;
     std::list<process*> childProc;
-    vm * virt;
     std::list<resource*> curRes;
     
 private:
